@@ -1,4 +1,4 @@
-# FullStack2020
+# TL,DR
 
 We are using a version of React containing `React hooks` 
 we have no need for defining `objects with methods`, 
