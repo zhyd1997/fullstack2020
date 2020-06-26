@@ -2,3 +2,4 @@
 - [x] 2.2 Course contents step7
 - [x] 2.3 Course contents step8 *
 - [x] 2.4: Course contents step9
+- [x] 2.5: separate module
