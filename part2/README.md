@@ -3,3 +3,4 @@
 - [x] 2.3 Course contents step8 *
 - [x] 2.4: Course contents step9
 - [x] 2.5: separate module
+- [x] 2.6: The Phonebook Step1
