@@ -15,9 +15,22 @@ const PersonForm = ({ addPerson, newName, newNumber, handlePersonChange, handleN
 		</div>
 	</form>
 
-const Persons = ({ persons }) => {
+const Persons = ({ persons, deletePerson }) => {
 	return (
-		persons.map(person => <span key={person.id}>{person.name}&nbsp;{person.number}<br /></span>)
+		persons.map(person =>
+				person.id !== undefined
+					?
+					<div key={person.id}>
+						<span>
+							{person.name}&nbsp;{person.number}&nbsp;
+						</span>
+						<button onClick={() => deletePerson(person.id)}>delete</button>
+						<br/>
+					</div>
+					:
+					''
+
+		)
 	)
 }
 
@@ -47,6 +60,21 @@ const App = () => {
 			})
 	}
 
+	const deletePerson = (id) => {
+		const person = persons.find(n => n.id === id)
+		window.confirm(`Delete someone ?`)
+
+		personService
+			.remove(id, person)
+			.then(returnedPerson => {
+				setPersons(persons.map(person => person.id !== id ? person : returnedPerson))
+			})
+			.catch(error => {
+				alert(`the person '${person.name}' was already deleted from server`)
+				setPersons(persons.filter(n => n.id !== id))
+			})
+	}
+
 	const handlePersonChange = (event) => {
 		setNewName(event.target.value)
 	}
@@ -67,7 +95,10 @@ const App = () => {
 				handleNumberChange={handleNumberChange}
 			/>
 			<h2>Numbers</h2>
-			<Persons persons={persons} />
+			<Persons
+				persons={persons}
+				deletePerson={deletePerson}
+			/>
 		</div>
 	)
 }

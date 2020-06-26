@@ -17,5 +17,5 @@
 - [ ] 2.14 Data for countries, step3 *
 - [x] 2.15 Phonebook step7
 - [x] 2.16 Phonebook step8
-- [ ] 2.17 Phonebook step9
+- [x] 2.17 Phonebook step9
 - [ ] 2.18 Phonebook step10 *

@@ -15,4 +15,11 @@ const create = newPerson => {
 	})
 }
 
-export default { getAll, create }
+const remove = (id, removePerson) => {
+	const request = axios.delete(`${baseUrl}/${id}`, removePerson)
+	return request.then(response => {
+		return response.data
+	})
+}
+
+export default { getAll, create, remove }
