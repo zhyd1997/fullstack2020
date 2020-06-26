@@ -1,4 +1,6 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
+
+import axios from 'axios'
 
 const PersonForm = ({ addPerson, newName, newNumber, handlePersonChange, handleNumberChange }) =>
 	<form onSubmit={addPerson}>
@@ -15,20 +17,24 @@ const PersonForm = ({ addPerson, newName, newNumber, handlePersonChange, handleN
 
 const Persons = ({ persons }) => {
 	return (
-		persons.map(person => <span key={person.name}>{person.name}&nbsp;{person.text}<br /></span>)
+		persons.map(person => <span key={person.id}>{person.name}&nbsp;{person.number}<br /></span>)
 	)
 }
 
 const App = () => {
-	const [persons, setPersons] = useState([
-		{name: 'Arto Hellas', text: '040-1234567'}
-	])
+	const [persons, setPersons] = useState([])
 	const [newName, setNewName] = useState('')
 	const [newNumber, setNewNumber] = useState('')
 
+	useEffect(() => {
+		axios
+			.get('http://localhost:3001/persons')
+			.then(response => setPersons(response.data))
+	}, [])
+
 	const addPerson = (event) => {
 		event.preventDefault()
-		const person = {name: newName, text: newNumber}
+		const person = {name: newName, number: newNumber}
 		setPersons(persons.concat(person))
 		console.log(persons)
 		alert(`${newName} ${newNumber} are already added to phonebook`)
