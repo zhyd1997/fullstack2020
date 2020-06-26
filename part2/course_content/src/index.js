@@ -11,29 +11,20 @@ const Total = ({ course }) => {
 	const tempArray = []
 	course.parts.forEach(i => tempArray.push(i.exercises))
 	const sum = tempArray.reduce((accumulator, currentValue) => accumulator + currentValue)
-	return(
+	return (
 		<b>total of {sum} exercises</b>
 	)
 }
 
-const Part = (props) => {
+const Part = ({ part }) => {
 	return (
 		<p>
-			{props.part.name} {props.part.exercises}
+			{part.name} {part.exercises}
 		</p>
 	)
 }
 
-const Content = ({ course }) => {
-	return (
-		<div>
-			<Part part={course.parts[0]} />
-			<Part part={course.parts[1]} />
-			<Part part={course.parts[2]} />
-			<Part part={course.parts[3]} />
-		</div>
-	)
-}
+const Content = ({ course }) => course.parts.map(item => <Part key={item.id} part={item} />)
 
 const Course = ({ course }) => {
 	return (
@@ -46,29 +37,56 @@ const Course = ({ course }) => {
 }
 
 const App = () => {
-	const course = {
-		name: 'Half Stack application development',
-		parts: [
-			{
-				name: 'Fundamentals of React',
-				exercises: 10
-			},
-			{
-				name: 'Using props to pass data',
-				exercises: 7
-			},
-			{
-				name: 'State of a component',
-				exercises: 14
-			},
-			{
-				name: 'Redux',
-				exercises: 11
-			}
-		]
-	}
+	const course = [
+		{
+			name: 'Half Stack application development',
+			id: 1,
+			parts: [
+				{
+					name: 'Fundamentals of React',
+					exercises: 10,
+					id: 1
+				},
+				{
+					name: 'Using props to pass data',
+					exercises: 7,
+					id: 2
+				},
+				{
+					name: 'State of a component',
+					exercises: 14,
+					id: 3
+				},
+				{
+					name: 'Redux',
+					exercises: 11,
+					id: 4
+				}
+			]
+		},
+		{
+			name: 'Node.js',
+			id: 2,
+			parts: [
+				{
+					name: 'Routing',
+					exercises: 3,
+					id: 1
+				},
+				{
+					name: 'Middlewares',
+					exercises: 7,
+					id: 2
+				}
+			]
+		}
+	]
 
-	return <Course course={course} />
+	return (
+		<div>
+			{course.map(item => <Course key={item.id} course={item} />)}
+		</div>
+	)
 }
 
 ReactDOM.render(<App />, document.getElementById('root'))

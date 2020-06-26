@@ -1,3 +1,4 @@
 - [x] 2.1 Course contents step6
 - [x] 2.2 Course contents step7
 - [x] 2.3 Course contents step8 *
+- [x] 2.4: Course contents step9
