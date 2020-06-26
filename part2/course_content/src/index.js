@@ -8,7 +8,9 @@ const Header = ({ course }) => {
 }
 
 const Total = ({ course }) => {
-	const sum = course.parts[0].exercises + course.parts[1].exercises + course.parts[2].exercises + course.parts[3].exercises
+	const tempArray = []
+	course.parts.forEach(i => tempArray.push(i.exercises))
+	const sum = tempArray.reduce((accumulator, currentValue) => accumulator + currentValue)
 	return(
 		<b>total of {sum} exercises</b>
 	)
