@@ -1,1 +1,2 @@
-- [x] 2.1
+- [x] 2.1 Course contents step6
+- [x] 2.2 Course contents step7
