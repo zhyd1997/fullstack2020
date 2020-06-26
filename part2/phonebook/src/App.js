@@ -1,5 +1,24 @@
 import React, {useState} from 'react';
 
+const PersonForm = ({ addPerson, newName, newNumber, handlePersonChange, handleNumberChange }) =>
+	<form onSubmit={addPerson}>
+		<div>
+			name: <input value={newName} onChange={handlePersonChange} />
+		</div>
+		<div>
+			number: <input value={newNumber} onChange={handleNumberChange} />
+		</div>
+		<div>
+			<button type="submit">add</button>
+		</div>
+	</form>
+
+const Persons = ({ persons }) => {
+	return (
+		persons.map(person => <span key={person.name}>{person.name}&nbsp;{person.text}<br /></span>)
+	)
+}
+
 const App = () => {
 	const [persons, setPersons] = useState([
 		{name: 'Arto Hellas', text: '040-1234567'}
@@ -28,19 +47,16 @@ const App = () => {
 	return (
 		<div>
 			<h2>Phonebook</h2>
-			<form onSubmit={addPerson}>
-				<div>
-					name: <input value={newName} onChange={handlePersonChange} />
-				</div>
-				<div>
-					number: <input value={newNumber} onChange={handleNumberChange} />
-				</div>
-				<div>
-					<button type="submit">add</button>
-				</div>
-			</form>
+			<h3>Add a new</h3>
+			<PersonForm
+				addPerson={addPerson}
+				newName={newName}
+				newNumber={newNumber}
+				handlePersonChange={handlePersonChange}
+				handleNumberChange={handleNumberChange}
+			/>
 			<h2>Numbers</h2>
-			{persons.map(i => <span key={i.name}>{i.name}&nbsp;{i.text}<br /></span>)}
+			<Persons persons={persons} />
 		</div>
 	)
 }
