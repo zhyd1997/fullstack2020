@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-
+import Notification from "./components/Notification"
 import personService from './services/persons'
 
 const PersonForm = ({ addPerson, newName, newNumber, handlePersonChange, handleNumberChange }) =>
@@ -38,6 +38,7 @@ const App = () => {
 	const [persons, setPersons] = useState([])
 	const [newName, setNewName] = useState('')
 	const [newNumber, setNewNumber] = useState('')
+	const [errorMessage, setErrorMessage] = useState(null)
 
 	useEffect(() => {
 		personService
@@ -53,10 +54,12 @@ const App = () => {
 			.create(person)
 			.then(returnedPerson => {
 				setPersons(persons.concat(returnedPerson))
-				console.log(persons)
-				alert(`${newName} ${newNumber} are already added to phonebook`)
 				setNewName('')
 				setNewNumber('')
+				setErrorMessage(`Added ${person.name}`)
+				setTimeout(() => {
+					setErrorMessage(null)
+				}, 5000)
 			})
 	}
 
@@ -86,6 +89,7 @@ const App = () => {
 	return (
 		<div>
 			<h2>Phonebook</h2>
+			<Notification message={errorMessage} />
 			<h3>Add a new</h3>
 			<PersonForm
 				addPerson={addPerson}

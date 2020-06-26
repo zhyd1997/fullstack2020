@@ -19,3 +19,5 @@
 - [x] 2.16 Phonebook step8
 - [x] 2.17 Phonebook step9
 - [ ] 2.18 Phonebook step10 *
+- [x] 2.19 Phonebook step11
+- [ ] 2.20 Phonebook step12 *
