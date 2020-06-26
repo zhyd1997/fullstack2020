@@ -62,17 +62,17 @@ const App = () => {
 
 	const deletePerson = (id) => {
 		const person = persons.find(n => n.id === id)
-		window.confirm(`Delete someone ?`)
-
-		personService
-			.remove(id, person)
-			.then(returnedPerson => {
-				setPersons(persons.map(person => person.id !== id ? person : returnedPerson))
-			})
-			.catch(error => {
-				alert(`the person '${person.name}' was already deleted from server`)
-				setPersons(persons.filter(n => n.id !== id))
-			})
+		if (window.confirm(`Delete someone ?`)) {
+			personService
+				.remove(id, person)
+				.then(returnedPerson => {
+					setPersons(persons.map(person => person.id !== id ? person : returnedPerson))
+				})
+				.catch(error => {
+					alert(`the person '${person.name}' was already deleted from server`)
+					setPersons(persons.filter(n => n.id !== id))
+				})
+		}
 	}
 
 	const handlePersonChange = (event) => {
